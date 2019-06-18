@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //对象 instanceof 构造函数
+    //1.判断对象能否使用该构造函数实例化得到
+    //2.判断对象的原型链上能否找到该构造函数的原型
+    //对象._proto_._proto_（长度不确定）=构造函数.prototype
+
+    //var o = new Object();
+    console.log(Object instanceof Function);//true
+    console.log(Object.__proto__ == Function.prototype);//tru
+    console.log(Object instanceof Object);//true
+    console.log(Object.__proto__.__proto__== Object.prototype);//true
+    console.log(Math instanceof Function);//false
+    console.log(Math instanceof Object);//true
+    console.log(JSON instanceof Function);//false
+    console.log(JSON instanceof Object);//true
+
+
+    function Person(username,age){
+        this.username = username;
+        this.age = age = age;
+    }
+    var p = new Person("zhangsan",18);
+    console.log(p.__proto__ == Person.prototype);//true  构造函数有prototype属性，对象有__proto__属性
+
+
+    var o = {
+        _x:1.0,
+        get x(){
+            return this._x;
+        },
+        set x(val){//赋值的过程
+            this._x = val;
+        }
+    };
+    console.log(o.x);
+    o.x = 2;//给x 赋值的过程，实际上是执行了set方法
+    console.log(o.x,o._x);
+
+
+    var p1 = {
+        _name:"Jack",
+        _age:23,
+        set age(val){
+            if(val>0&&val<150){
+                this._age = val;
+            }else{
+                console.log("请设置正常年龄");
+            }
+        },
+        get age(){
+            return this._age;
+        }
+    };
+    p1.age = 178;
+</script>
+</html>

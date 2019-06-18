@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text"/>
+    <br/>
+    <br/>
+    <input type="file"/>
+    <br/>
+    <br/>
+    <input type="button" value="绑定点击事件" id="button1"/>
+    <br/>
+    <br/>
+    <input type="button" value="绑定点击事件" id="button2"/>
+    <br/>
+    <br/>
+    <input type="button" value="绑定点击事件" id="button3"/>
+    <br/>
+    <br/>
+    <img src="http://p0.so.qhmsg.com/sdr/200_200_/t01cda475f35ef8953f.png"/>
+</body>
+<script src="http://code.jquery.com/jquery-3.1.1.min.js">//引入jquery库</script>
+<script>
+    /*
+        jquery包装集.事件方法(回调函数)
+    */
+    $("#button1").click(function(){
+        alert("按钮被点击了！");
+    })
+    $(":button").click(function(){
+        alert("按钮被点击了！");
+    })
+    $("img").mouseover(function(){
+        $("img").css("border","2px solid red");
+        // this.style.border = "2px solid red"; 也可以这样写
+    })
+    $("img").mouseout(function(){
+        $("img").css("border","none");
+    })
+</script>
+</html>

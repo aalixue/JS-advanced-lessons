@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function* helloGenerator(){
+        yield "hello";
+        yield "world";
+        return "ending";
+    }
+    var iterator = helloGenerator();
+    console.log(iterator.next());//{value: "hello", done: false}
+    console.log(iterator.next());//{value: "world", done: false}
+    console.log(iterator.next());//{value: "ending", done: true}
+    
+    let obj = {};
+    obj[Symbol.iterator] = function* (){
+        yield 1;
+        yield 2;
+        yield 3;
+    }
+    for(let i of obj){
+        console.log(i);//1 2 3
+    }
+
+    let str = "abcdefg";
+    for(let i of str){
+        console.log(i);//a b c d e f g
+    }
+
+    /*
+        promise将异步时的代码写成同步的方式进行执行
+    */
+    // setTimeout(function(){
+    //     console.log("时间到");
+    // },3000);
+    // console.log("同步代码1");
+    // console.log("同步代码2");
+
+
+    /*
+        new Promise(function(resolve,reject){
+            异步操作
+            resolve(); 异步操作成功时的调用
+            reject(); 异步操作失败是的调用
+        }).then(function(){
+            其实就是resolve的函数的定义
+        },function(){
+            其实就是reject函数的定义
+        })
+    */
+    new Promise(function(resolve,reject){
+        setTimeout(function(){
+            console.log("时间到");
+            resolve("hello");//异步操作成功时的回调函数
+        },3000);
+    }).then(function(val){
+        console.log(val);//hello
+    },function(){
+
+    }).catch(function(){
+        /*捕获异常的*/
+    }).finally(function(){
+        console.log("不论如何都会执行");
+    })
+</script>
+</html>

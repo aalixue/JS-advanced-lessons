@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /*
+        模拟类-类继承的形式一：
+    */
+    // function Person(name,age){
+    //     this.name = name;
+    //     this.age = age;
+    // };
+    // Person.prototype.showName = function(){
+    //     console.log(this.name);
+    // };
+    // function Student(name,age,id){
+    //     /*
+    //         Person.call 切换了Person函数内部this的指向
+    //     */
+    //     Person.call(this,name,age);
+    //     this.id = id;
+    // }
+    // Student.prototype.__proto__ = Person.prototype;
+    // var s1 = new Student("xxx",22,2017001);//Person.call(this,name,age); 其中的this指的是s1
+    // var s2 = new Student("yyy",23,2017002);
+    // s1.showName();
+    // console.log(s1);
+    // console.log(s2);
+
+    /*
+        var s1 = new Student("", ,"");
+        s1.__proto__ == Student.prototype
+        Student.__proto__ == Person.prototype
+        s1.__proto__.proto__ == Person.prototype
+    */
+
+
+
+    /*
+        模拟类-类继承的形式二：
+    */
+    function Person(name,age){
+        this.name = name;
+        this.age = age;
+    };
+    Person.prototype.showName = function(){
+        console.log(this.name);
+    };
+    function Student(name,age,id){
+        /*
+            Person.call 切换了Person函数内部this的指向
+        */
+        Person.call(this,name,age);
+        this.id = id;
+    }
+    /*
+
+    */
+    //Student.prototype = Object.create(Person.prototype);
+    var p1 = Object.create(Person.prototype);
+    Student.prototype = p1;
+    Student.prototype.constructor = Student;
+    var s1 = new Student("xxx",22,2017001);//Person.call(this,name,age); 其中的this指的是s1
+    var s2 = new Student("yyy",23,2017002);
+    console.log(s1);
+    console.log(s2);
+</script>
+</html>

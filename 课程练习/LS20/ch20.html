@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /*
+        /正则表达式的文本部分/正则表达式的标识符
+        [xzy]指的是匹配中括号中任意的字符
+        标识符：
+        g是否全局的搜索，获取的所有的匹配项还是只获取一个
+        i表示是否忽略大小写
+    */
+    var reg1 = /[bcf]at/gi;
+    // var reg1 = new RegExp(/[bcf]at/,"gi");
+    // var reg1 = new RegExp("[bcf]at","gi");
+    console.log("a fAt bat ,a faT cat".match(reg1));// ["fAt", "bat", "faT", "cat"]
+    var str = "fat cat bat Fat ojdjfh sdsk";
+    var arr = str.match(reg1);
+    console.log(arr);//["fat", "cat", "bat", "Fat"]
+
+
+    var str1 = "abcedf adf kil ad adffffff afc adgc";
+    var reg2 = /adf/gi;
+    console.log(str1.match(reg2));// ["adf", "adf"]
+
+    /*
+        *表示匹配前面的模式 x 0 或多次。
+    */
+    var reg3 = /adf*/gi;
+    console.log(str1.match(reg3));//["adf", "ad", "adffffff", "ad"]
+
+    /*
+        .表示任意单个字符
+    */
+    var reg4 = /a.c/gi;
+    console.log(str1.match(reg4));//["abc", "afc"]
+
+    /*
+        字符类别：
+        \d表示任意的阿拉伯数字 [0-9]
+        \D表示在特定位置上不是一个阿拉伯数字 等价于[^0-9]。
+    */
+    var reg5 = /a\dc/gi;
+    var reg5_2 = /a\Dc/gi;
+    var str2 = "a2c a3c a5ca4r a5gxabc";
+    console.log(str2.match(reg5));//["a2c", "a3c", "a5c"]
+    console.log(str2.match(reg5_2));//["abc"]
+
+    /*
+        [xyz]从中括号的字符集合当中任取一个字符
+        [^xyz]排除中括号字符集合中的字符
+    */
+    var str3 = "atf btf ktf stfsv"
+    var reg6 = /[^abc]/gi;
+    console.log(str3.match(reg6));//["t", "f", " ", "t", "f", " ", "k", "t", "f", " ", "s", "t", "f", "s", "v"]
+
+    /*
+        边界:
+        ^匹配开始的位置
+    */
+    var reg7 = /^a[0-9]/gi;
+    var str4 = "a1 b2 c3 a4";
+    console.log(str4.match(reg7));//["a1"]
+
+    /*
+        边界：
+        $匹配字符串的结束位置
+    */
+    var reg8 = /[0-9]z$/gi;
+    var str5 = "abcd9z";
+    var str5_2 = "acfbdfdfdf8";
+    // console.log(str5.match(reg8));
+    // console.log(str5_2.match(reg8));
+    console.log(reg8.test(str5));//true
+    console.log(reg8.test(str5_2));//false
+
+    /*
+
+    
+        数量词：
+        ?表示之前的字符出现0次或者1次
+        +表示之前的字符出现1次或者多次
+        {m,n}m是最小出现次数，n是最多出现次数
+    */
+    var reg9 = /abc?/gi;
+    var str6 = "abc ab kkk abf acvabcr";
+    console.log(str6.replace(reg9,"x"));//x x kkk xf acvxr
+
+    var reg10 = /abc+/gi;
+    var str7 = "abc abccc abccccc ab";
+    console.log(str7.replace(reg10,"x"));//x x x ab
+
+    var reg11 = /abc{1,3}/gi;
+    var str8 = "abc abcc abccc abcccc";
+    console.log(str8.replace(reg11,"x"));//x x x xc
+
+
+//*******************************************************************************************//
+    /*
+        \d数字
+        \s空格
+        .任意字符
+        \w[A-Za-z0-0]
+    */
+    var reg12 = /\d./gi;
+
+    /*
+        [xzy]指的是匹配中括号中任意的字符
+    */
+   var reg13 = /[xyz]a/gi;
+   var str9 = "xabjiya";
+   console.log(str9.replace(reg13,"m"));//mbjim
+
+    /*
+        ^a 以特定字符起始
+        b$以特定的字符结束
+    */
+
+    /*
+        量词
+        a* 字符出现0次 多次
+        a+ 字符出现1次 多次
+        a? 字符出现0次 1次
+    */
+
+
+    /*
+        分组可以看做当前正则表达式的子规则，分组匹配得到的内容，可以在exec方法调用的返回结果中查看
+    */
+    var reg14 = /(abc)\d/gi;
+    var str10 = "abc1efg2";
+    console.log(reg14.exec(str10));//["abc1", "abc", index: 0, input: "abc1efg2", groups: undefined]
+
+    var reg15 = /(ab\d)\d/gi;
+    var str11 = "ab31efg2";
+    console.log(reg15.exec(str11));//["ab31", "ab3", index: 0, input: "ab31efg2", groups: undefined]
+
+    var reg16 = /(ab\d)(\def)\d/gi;
+    var str12 = "ab31ef12";
+    console.log(reg16.exec(str12));//["ab31ef1", "ab3", "1ef", index: 0, input: "ab31ef12", groups: undefined]
+
+
+    /*
+        反向引用，通过\m来引用前面出现的分组
+        m表示前面出现的第几个分组
+    */
+    var reg17 = /(ss)a\1/gi; //等价于  var reg17 = /(\d)a(\d)/gi;
+    var str13 = "ssassj1";
+    console.log(str13.replace(reg17,"x"));//xj1
+
+
+    //*****************************************************************************************************//
+    
+    /*
+        String.prototype
+            str.replace(正则表达式,"替换成的内容");
+            str.match(正则表达式)
+                返回的是一个数组或者是null
+                [整个正则匹配到的内容,分组匹配到的内容,开始匹配位置的索引]
+            str.search(正则表达式)
+                在str当中检索符合正则表达式规则的内容，如果检索到了，返回其第一个字符出现的位置；如果没有，则返回-1
+
+        RegExp.prototype
+            reg.test(字符串)
+                验证字符串是否符合正则表达式规则，符合返回true，不符合返回false
+            reg.exec(字符串)
+    */
+    var reg18 = /(ss)abc\d/gi;
+    var str14 = "kkafd ssabc2";
+    console.log(str14.match(reg18)); //["ssabc2"]
+
+
+    /*
+        验证压缩文件格式
+    */
+    var reg19 = /(.*)\.(rar|zip|7zip|tgz)$/;
+    /*
+        (.*)  压缩文件的名字(.+)更合适
+        \.    对.进行转义，表示普通字符
+        (rar|zip|7zip|tgz) 从其中任意取一个类型
+        $     表示以前面的分组结尾
+    */
+
+    var reg20 = /^#[a-fA-F0-9]{6}$/;
+    /*
+        ^#   表示的是以#开头
+        [a-fA-F0-9]  表示集合，从其中任取一个字符 a-f A-F 0-9
+        {6}  表示之前的字符出现6次
+        $    必须要以前面的字符结尾
+    */
+</script>
+</html>

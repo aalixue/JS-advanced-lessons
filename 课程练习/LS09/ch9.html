@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    console.log(a);
+    if(true){
+        var a = 1;
+    }
+    console.log(a);
+
+    //该种情况时，仅会对变量进行提升
+    //定义的提升
+    foo();
+    var foo = function(){
+        console.log("foo");
+    }
+
+    AA();
+    function AA(){
+        console.log('AA_1');
+    }
+    var AA = function AA(){
+        console.log('AA_2');
+    }
+    AA();
+</script>
+</html>

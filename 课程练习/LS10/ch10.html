@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //从头到尾是全局作用域
+    //fn1形成一个局部作用域
+    //fn2形成一个局部作用域
+    //范围从小到大
+    var a = 1;//全局变量，所有位置均可访问到
+    function fn1(){
+        console.log(a);//1
+        var b = 2;
+        var c = 3;
+        function fn2(){
+            var c = 30;
+            var d = 4;
+            console.log(c);
+        }
+        fn2();
+        console.log(c);
+        console.log(d);
+    }
+    //fn2();fn2在fn1外边无法调用，会报错。
+    fn1();
+
+    //词法的静态性
+    //函数和变量在完成定义之后，作用域就都是确定的，和调用形式没有关系
+    var username = "jack";
+    function foo(){
+        //username = "bill";
+        console.log(username);
+    }
+    function bar(){
+        var username = "mike";
+        foo();
+        console.log(username);
+    }
+    bar();
+
+    //ES5没有块级作用域，只有函数的局部作用域
+    if(true){
+        var a = 2;
+    }
+    console.log(a);
+    function fn1(){
+
+    }
+
+    //ES6
+    //变量限定在花括号范围之内，外边访问不到
+    if(true){
+        let b = 3;
+    }
+    console.log(b);
+
+    //变量覆盖了
+    var userId = 5;
+    document.onclick = function(){
+        console.log(userId);
+        userId = 10;
+    };
+    /*一大段代码*/
+    if(true){
+        var userId = 30;
+    }
+    //结果为30
+   
+
+    //解决方法
+    var userId = 5;
+    document.onclick = function(){
+        console.log(userId);
+        userId = 10;
+    };
+    /*一大段代码*/
+    (function(){
+        if(true){
+            var userId = 30;
+        }
+    })()
+   //结果为5
+
+
+   //上下文,当某行代码执行过程时，它的上下文环境（当前作用域包含了变量、函数调用栈、this指向）
+   var x = 5;
+   var y = 6;
+   function foo(){
+       var a = 1;
+       var b = 2;
+       function bar(){
+           var c = 3;
+           var d = 4;
+       }
+       bar();
+   }
+   foo();
+
+</script>
+</html>

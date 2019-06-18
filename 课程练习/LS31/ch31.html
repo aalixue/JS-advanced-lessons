@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /*
+        Symbol函数的参数只是表示Symbol值的描述，相同参数的Symbol函数的返回值是不相等的
+    */
+    let s1 = Symbol("s1");
+    let s2 = Symbol("s2");
+    let s3 = Symbol("s3");
+    console.log(s1 == s3);//false
+
+    /*
+        Symbol作为对象的属性名，永远不会重复
+        对象[symbol]
+        {
+            [symbol]:属性值
+        }
+    */
+    let obj ={};
+    obj[s1] = "hello";
+    let obj1 = {
+        [s1]:"world"
+    }
+    console.log(obj[s1]);//hello
+    console.log(obj1[s1]);//world
+
+    /*
+        得到之前定义过的symbol
+        Symbol.for() 首先查看是否存在该描述描述信息的Symbol变量
+        存在的话直接获取，不存在的话会新建一个Symbol
+    */
+    let s4 = Symbol("foo");
+    console.log(Symbol.for("foo")==Symbol.for("foo"));//true
+</script>
+</html>

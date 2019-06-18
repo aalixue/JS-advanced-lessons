@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /*
+        JavaScript是基于
+    */
+    /*var obj = {
+        num:1,
+        str:"hi",
+        sayHi:function(){
+            console.log(this.str);
+        }
+    };
+    var newObj = Object.create(obj);
+    console.log(newObj.__proto__ == obj);
+    console.log(newObj.num);
+    newObj.sayHi();*/
+
+
+    var obj = {z:3};
+
+    console.log(obj.__proto__ == Object.prototype);
+    console.log(obj1.__proto__.__proto__);//null
+
+    var obj2=Object.create(obj1);
+    console.log(obj2.__proto__);
+    console.log(obj2.__proto__.__proto__);
+    console.log(obj1.__proto__.__proto__.__proto__);//null
+
+</script>
+</html>

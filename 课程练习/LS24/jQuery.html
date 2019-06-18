@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body id="mybody">
+    <table id="tb1" width="400" height="400" border="1" align="center">
+        <tr class="even">
+            <td id="td1"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr class="odd">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+        </tr>
+        <tr class="even">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr class="odd">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <table width="400" height="400" border="1" align="center">
+        <tr class="even">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr class="odd">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr class="even">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr class="odd">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</body>
+<script src="http://code.jquery.com/jquery-3.1.1.min.js">//引入jquery库</script>
+<script>
+    /*
+        jquery.min.js 压缩版的，一般用于生产环境
+        jquery.js 未压缩，一般用于开发环境
+    */
+    /*
+        $(jquery选择器)
+    */
+    /*
+        $("") jquery包装集
+        选择器：id选择器、类选择器、标签选择器、层级选择器
+        （后代选择器、子选择器）
+    */
+    $("#mybody").css("background","pink");
+    $("#tb1 .even").css("background","blue");
+    $("td:first").css("background","red");
+    $("td:last").css("background","green");
+    $("td:even").css("background","orange");
+    $("td:odd").css("background","purple");
+
+    /*
+        eq(index) 选中特定索引值
+        gt(index) 选中的索引值大于index的元素
+        lt(index) 选中的索引值小于index的元素
+        not(selector) 从特定集合中排除一些元素
+    */
+    $("td:eq(0)").css("background","white");
+    $("td:gt(16)").css("background","yellow");
+    $("td:lt(1)").css("background","lightblue");
+    $("td:not(#td1)").css("background","gray");
+</script>
+</html>

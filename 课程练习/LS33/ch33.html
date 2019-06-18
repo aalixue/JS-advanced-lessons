@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function createIterator(arr){
+        var i = 0;
+        return{
+            next:function(){
+                return i < arr.length ?
+                {value:arr[i++],done:true} :
+                {value:undefined,done:false};
+            }
+        }
+    }
+    var iterator = createIterator([1,2,3,4]);
+    console.log(iterator.next());//{value: 1, done: true}
+    console.log(iterator.next());//{value: 2, done: true}
+    console.log(iterator.next());//{value: 3, done: true}
+    console.log(iterator.next());//{value: 4, done: true}
+    console.log(iterator.next());//{value: undefined, done: false}
+
+    let m1 = new Map([1,2,3,4]);
+    for(let num of m1){
+        console.log(num);
+    }
+
+    /*arguements*/
+
+    /*
+        判断数据结构能否被遍历器所遍历
+        不能直接针对对象应用遍历器
+    */
+    let arr2 = [1,2,3];
+    let person = {"name":"zhangsan","age":20};
+    console.log(arr2[Symbol.iterator]);
+</script>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //set
+    let s1 = new Set([1,2,3,4,5,6,1,2,3]);
+    console.log(s1);//Set(6) {1, 2, 3, 4, 5, 6}
+    for(var i of s1){
+        console.log(i);
+    }    
+
+    //Map
+    let m1 = new Map([
+        ["username","zhangsan"],
+        ["age",20],
+        ["sex","male"]
+    ]);
+    console.log(m1.keys());//MapIterator {"username", "age", "sex"}
+    for(let j of m1.keys()){
+        console.log(j);//遍历三个键名
+    }
+    console.log(m1.size);//3
+    for(let i of m1){
+        console.log(i);//遍历的是m1里面的三个数组
+    }
+    console.log(m1.set("weight","60kg"));//共有四个数组
+    console.log(m1.get("username"));//zhangsan
+    console.log(m1.delete("username"));//true
+    console.log(m1.has("sex"));//true
+
+</script>
+</html>

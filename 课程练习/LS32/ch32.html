@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    class Point {
+        // constructor是构造函数的意思
+        constructor(){
+            this.x = 1;
+            this.y = 2;
+        }
+        show(){
+            console.log(this.x);
+        }
+        show(){
+            console.log(this.y);
+        }
+    }
+    console.log(typeof Point);//function
+    let p1 = new Point();
+    p1.show();
+
+    //静态方法
+    /*
+        使用static 方法() {} 来添加静态方法
+        静态方法通过类进行调用
+        静态方法内部的this指向类本身
+    */
+    class Point1 {
+        // constructor是构造函数的意思
+        constructor(){
+            this.x = 1;
+            this.y = 2;
+        }
+        show(){
+            console.log(this.x);
+        }
+        static showPoint(){
+            console.log(this);
+        }
+    }
+    Point1.showPoint();
+
+    /*继承的实现方式*/
+    let obj1 = {"x":1};
+    let obj2 = Object.create(obj1);
+    console.log(obj2.x);
+
+    let obj3 = {"y":2};
+    obj4.__proto__ = obj3;
+
+    //基于构造函数的继承
+    function fn1(){
+        this.x = 1;
+    }
+    fn1.prototype.show = function() {
+        console.log(this.x);
+    }
+    let obj5 = new fn1();
+</script>
+</html>

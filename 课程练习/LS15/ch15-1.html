@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // var obj1 = {z:1};
+    // var obj2 = Object.create(obj1);//=> obj.__proto__ == obj1
+    // console.log(obj1.__proto__ == Object.prototype);//true
+    // console.log(obj2.__proto__);//obj1
+    // console.log(obj2.__proto__.__proto__);//obj1.__proto__
+    // console.log(obj2.__proto__.__proto__.__proto__);//null
+
+
+    // var obj1 = {z:1,sayHi:function(){
+    //     console.log(this.z);
+    // }};
+    // var obj2 = Object.create(obj1);
+    // obj2.z;
+    // obj2.sayHi();
+
+
+    //构造函数
+    // function Person(username,age){
+    //     this.username = username;
+    //     this.age = age;
+
+    //     // this.sayHi = function(){
+    //     //     console.log(this.username);
+    //     // } //用以下方法代替，节省了内存空间
+    // }
+    // Person.prototype.sayHi = function(){
+    //     console.log(this.username);
+    // }//这样写节省空间,可以把属性放在函数内写，把共有方法放在prototype这样写
+    // var person1 = new Person("zhangsan",18);
+    // var person2 = new Person("lisi",30);
+    // console.log(person1.__proto__==person2.__proto__);
+    // //person1和person2公用sayHi方法，节省内存空间
+    // person1.sayHi();
+    // person2.sayHi();
+
+
+
+    //基于构造函数实现的原型继承以及原型链的图解
+    // function Person(username,age){
+    //     this.username = username;
+    //     this.age = age;
+    // }
+    // Person.prototype.sayHi = function(){
+    //     console.log(this.username);
+    // }
+    // var person = new Person("zhangsan",18);
+    // person.sayHi();
+    // console.log(Person.prototype== person.__proto__);//true
+    // console.log(Person.prototype.constructor == Person);//true
+    // console.log(Person.prototype.__proto__ == Object.prototype);//true
+    // console.log(Object.prototype.constructor == Object);//true
+    // console.log(Object.prototype.__proto__ == null);//true
+
+
+
+    //eg:定义一个车(car)的对象，父对象，height，width，weight
+    //创建一个小轿车(smallCar)的对象，继承车相关的属性，自身具有颜色color，seatNum
+    //通过create方法，以及构造函数的形式
+
+    var car = {
+        height:150,
+        width:200,
+        weight:2000
+    }
+    //create形式
+    var smallCar = Object.create(car);
+    smallCar.color = '蓝色';
+    smallCar.seatNum = 5;
+    console.log(smallCar);
+    console.log(smallCar.height);
+
+    //构造函数形式
+    function createSmallCar(color,seatNum){
+        this.color = color;
+        this.seatNum = seatNum;
+    }
+    createSmallCar.prototype = car;
+    var smallCar = new createSmallCar("蓝色",5);
+    console.log(smallCar);
+</script>
+</html>

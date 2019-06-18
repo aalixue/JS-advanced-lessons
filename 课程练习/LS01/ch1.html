@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //demo01中定义，demo02中调用，尽量避免全局方法
+    function  max (a,b) {
+        return a>b?a:b;
+    }
+
+
+    //避免滥用全局变量,见demo2.js
+    var x = 10;
+    document.onclick = function () {
+        console.log("x = ",x);
+        alert("x = "+x);
+    };
+
+
+
+    //如何避免全局污染，使用IIFE函数立即执行表达式
+    (function () {  // 开始
+    var x = 10;
+    document.onclick = function () {
+        //console.log("x = ",x);
+        alert("x = "+x);
+    };
+    })();  
+    
+    console.log("i'm demo ");
+    console.error("demo error");
+    console.trace();
+ 
+    console.log("max = "+ max(2,3));
+
+
+    (function(){
+    //避免滥用全局变量
+        var x = 20;
+    }());
+
+    //基本语法回顾
+    var x;//变量声明 区分声明与定义（对比其他语言 JS的语言特点，动态类型、弱类型）语句
+    x = 23;//表达式作为语句时（赋值表达式语句）
+
+    //条件语句
+    if(x>22){
+        x+=2;
+    }else{
+        console.log("x 不大于 22");
+    }
+
+    //循环语句
+    for(var i=0;i<3;i++){
+        console.log("i:",i);
+    }
+    console.log(i);
+
+    //函数定义及调用   
+    function max(x,y) {
+        return x>y?x:y;
+    }
+    console.log(max(2,3));
+
+    //复合运算符
+    var a = 3;
+    a+=5;
+    console.log(a);
+
+    //数据类型
+    var num = 1;
+    var str = "some string";
+    var b = true;
+    var n = null;
+    var u = undefined;//如果没赋值的话，是什么情况
+
+    var arr = ["apple", "pear", "banana"];
+    var func = function(){
+        return "this a function";
+    };
+    var obj = new Object();
+    obj.name = "test";
+
+    console.log("\n");
+    console.log(typeof num); //number
+    console.log(typeof str); //string
+    console.log(typeof b); //boolean
+    console.log(typeof n); //这里返回的是object，这是JS语言的特别之处
+    console.log(typeof u); //undefined
+    console.log("\n");
+    console.log(typeof arr); //object
+    console.log(typeof func); //function
+    console.log(typeof obj); //object
+
+    //==、=== 回顾 值类型与引用类型回顾 不同类型变量 判等时的区别
+    //判等步骤
+    //1.看是==还是===
+
+    //2.如果是===则先看类型
+    // 类型不同肯定false
+    // 类型相同（如果是基本类型：判断值是否相等；  如果是引用类型：判断引用是否是同一个引用）
+
+    //3.如果是==则先看类型
+    // 先试着进行类型转换
+    // 转换后（如果是基本类型：判断值是否相等；   如果是引用类型：判断引用是否是同一个引用）
+    var a1 = 2;
+    var a2 = "2";
+    console.log(a1==a2);//true or false 原理是什么？？？？？
+    console.log(a1===a2);
+
+    var b1 = {};
+    var b2 = {};
+    console.log(b1==b2);//true or false 原理是什么？？？？？
+    console.log(b1===b2);//true or false
+    console.log(b1===b1);//true or false
+
+    //包装对象
+    var str2 = "abc";
+    console.log(str2.length);
+    str2.length = 1;
+    console.log(str2);//原始类型变量的不可变性，指的是包装对象的改变并不影响原始类型的变量
+
+    //怎么理解JS中都是对象这句话
+    //访问基本类型的变量属性时，会创建临时包装对象，访问的是该包装对象的属性
+    //另外改变此临时包装对象的属性，并不会影原变量（原始类型变量的不可变性）
+
+    //undefined与null 未确定的值、空引用
+
+    //typeof 与 instance
+    //typeof 常用于检测基本类型的变量
+    //instance 常用于检测引用类型的变量 instance左侧期望是一个对象，右侧期望是一个类型
+    console.log({}instanceof Object);
+    console.log([]instanceof Object);
+    console.log([]instanceof Array);
+
+    //布尔类型与逻辑运算符
+
+    //逻辑与、或的基本理解
+    console.log(2>1&&4<5);
+    console.log(true&&(!2));
+    console.log(false&&("2" == 2));
+    console.log(false&&false);
+
+    console.log(2>1||4<5);
+    console.log(true||(!2));
+    console.log(false||("2" == 2));
+    console.log(false||false);
+
+    //数字类型
+    console.log(1===1.0);
+    console.log(Number("xyz"));
+    console.log(3/0);
+
+    var a = 10;
+    console.log(++a);
+
+    var b = 20;
+    console.log(b++);
+
+    //字符串链接
+    var a = "abc";
+    var b = "def";
+    var c = a+b;
+
+    //字符串常用方法，字符串的方法源于String.prototype
+    var str1 = "aaa".concat("bbb");//返回字符串
+    var str2 = "abcdef".slice(2);
+    var str3 = "abcdef".slice(2,5);
+    var str4 = "abcdef".slice(-2);
+    var str5 = "abcdef".slice(2,-2);
+
+    var str6 = "abcdef".split("c");//返回数组
+    var str7 = "abcdef".split("c",1);
+    var str8 = "abcdef".split("c",2);
+
+    var str9 = "abcdef".charAt(2);
+    var str10 = "abcdefabcdef".indexOf("d",1);
+    var str11 = "abcdefabcdef".indexOf("d",4);//从第4个开始找
+
+    var str12 = "    abc def     \r\n  ".trim();//返回已移除前导空格、尾随空格和行终止符的原始字符串
+
+    //substr 与 substring的区别
+    var str13 = "abcdefghijklmn";
+    var str14 = str13.substr(2,5);//后一个参数代表长度
+    console.log(str13,str14);//str13 未受到破坏
+
+    var str15 = str13.substring(2,5);//后一个参数代表第几个end
+    console.log(str13,str15);//str13 未受到破坏
+
+</script>
+</html>

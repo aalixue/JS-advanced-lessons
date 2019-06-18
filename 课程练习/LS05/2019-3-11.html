@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //
+    var a = 45;
+    if(54 == a){
+        console.log("判等，值写在前面，自变量写在后边");
+    }
+    var a1 = 20;
+    var a2 = "20";
+    //隐式类型转换
+    if(a1 == a2){
+
+    }
+    //===先判断类型，然后在判断值
+    if(a1 === a2){
+
+    }
+    var x = "1";
+    //++x先进行运算，然后输出
+    //x++先输出，然后在运算
+    console.log(++x); 
+    console.log(x++); 
+    console.log(x);
+    //字符串拼接
+    var x = "1";
+    console.log(x+=1);
+
+    var score = 76;
+    if(score >90){
+        console.log("优");
+    }else  if(score >75){
+        console.log("良");
+    }else if(score >60){
+        console.log("及格");
+    }else{
+        console.log("不及格");
+    }
+    //改良
+    var score1 = 76;
+    console.log((score1>90&&"优")||(score1>75&&"良")||(score1>60&&"及格")||"不及格");
+
+    //switch和case做的是全等判断，必须值和类型全都相等
+    var score2 = 93;
+    switch(true){
+        case score2 > 90:
+            console.log("优");
+            break;
+        case score2 > 75:
+            console.log("良");
+            break;
+        case score2 > 60:
+            console.log("及格");
+            break;
+        default:
+            console.log("不及格");
+    }
+
+    //定义函数的形参和调用函数的实参个数可以不一致
+    //ES5中实现默认值得过程
+    function sum(x,y,z){
+        console.log(x,y,z);
+        x = x;
+        y = y;
+        z = z;
+        return x+y+z;
+    }
+    console.log(sum());
+
+    //或操作可以做函数参数的默认值
+    function sum(x,y,z){
+        x = x || 1;
+        y = y || 2;
+        z = z || 3;
+        return x+y+z;
+    }
+    console.log(sum());
+    console.log(sum(4,5,6));
+
+    //ES6中设置函数默认值
+    function sum1(x,y = 2,z = 3){
+        return x + y + z;
+    }
+    sum1(1);
+
+    //函数
+    function sum2(x,y){
+        return x + y;
+    }
+    sum2(1,2);//函数的调用写在函数上边也能正常调用，即变量的定义会被解释器提升
+
+    //匿名函数
+    window.onload = function(){
+        alert("页面加载完成");
+    }
+
+    var sum3 = function(x,y){
+        return x + y;
+    }
+    sum3(1,2);
+
+    //使用Function构造函数来实例化得到一个function
+    //Function实例化函数，执行效率相对较低，但是更加灵活
+    var fn1 = new Function('x','y',"return x + y");
+    fn1(1,2);
+</script>
+</html>

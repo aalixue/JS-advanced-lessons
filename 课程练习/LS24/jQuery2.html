@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            background: #ddd;
+            margin-top: 10px;
+        }
+        #container{
+            height: 400px;
+            width: 800px;
+            margin: 0 auto;
+            border: 1px solid red;
+            background: white;
+        }
+        #btnlist{
+            background: white;
+            width: 1000px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div>层1</div>
+    <div>层2</div>
+    <div>层3</div>
+
+    <table>
+        <tr>
+            <td>用户名：</td>
+            <td><input type="text" name="username" id="username"/></td>
+        </tr>
+        <tr>
+            <td>密码：</td>
+            <td><input type="password" name="pwd" id=""/></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="button" value="登录"/>
+            </td>
+        </tr>
+    </table>
+
+    <div id="container">
+        <img src="http://p0.so.qhmsg.com/sdr/200_200_/t01cda475f35ef8953f.png" id="img1"/>
+    </div>
+    <div id="btnlist">
+        <button id="btn">after</button>
+    </div>
+</body>
+<script src="http://code.jquery.com/jquery-3.1.1.min.js">//引入jquery库</script>
+<script>
+    $("div").mouseover(function(){
+        $("this").css("background","blue");
+        // this.style.background = "blue"; 
+    })
+    $("div").mouseout(function(){
+        $("this").css("background","#ddd");
+    })
+    $("div").click(function(){
+        $("this").css("background","red");
+    })
+
+
+    /*
+        $(选择器).val();
+        $("html标记")
+        $(选择器).append(); 向所选中元素内部添加一个新的元素
+        $(选择器).remove(); 将特定元素从页面结构中移除
+
+        val()  用于设置或者获取表单元素的value值
+        html() 用于设置或获取双标记标签元素的标签内部的html内容
+        css()  用于设置选中元素样式 css("样式名","样式值")
+        css({"样式名":"样式值"}) 
+    */
+    $("#username").blur(function(){
+        var inputVal = $(this).val();//this指的是触发事件DOM元素对象
+        // var errorTip = $("<span>用户名不能为空</span>");
+        if(inputVal == ""){
+            // $(this).parent().append(errorTip);
+            $(".error").html("用户名不能为空");
+            $(".error").css({
+                "color":"red",
+                "font-size":"12px"
+            });
+        }
+        else{
+            $(".error").remove();
+        }
+    })
+
+    $("#btn").click(function(){
+        $("#img1").attr("src","2.png");
+        $("#img1").attr("title","这是一张图片");
+        alert($("#img1").attr("title"));
+        //移除特定属性
+        $("#img1").removeAttr("title");
+    })
+    $("#btn1").click(function(){
+        $("#img1").addClass("imgborder");
+        $("#img1").removeClass("imgborder");
+    })
+</script>
+</html>

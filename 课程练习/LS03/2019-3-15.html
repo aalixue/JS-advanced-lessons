@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>2019-03-15</title>
+</head>
+<body>
+    
+</body>
+<script>
+    var obj = {
+        x:0,
+        //test内部的this指向改调用方法的对象
+        test:function(){
+            console.log(this.x);
+        }
+    }
+    obj.test();
+
+    var objA = {"objName":"AAA"};
+    var objB = {"objName":"BBB"};
+    objA.foo = function(){
+        console.log(this.objName);
+    }
+    objA.foo();          //结果为AAA
+    //方法名.call(对象) 可以切换方法调用的对象
+    //apply() 也可以实现切换方法调用的对象
+    objA.foo.call(objB); //结果为BBB
+
+
+
+    //构造函数的调用
+    function Person(username){
+        this.username = username;
+    }
+
+    Person.prototype.sayHi = function(){
+        console.log(this.username);
+    }    //所有对象所共有
+
+    var person = new Person("zhangsan");
+    console.log(person.__proto__===Person.prototype);
+
+
+    //arguments获取函数传入的实参，是个类数组对象
+    function test1(){
+        var s = "";
+        for(var i = 0;i < arguments.length;i++){
+            s += arguments[i];
+        }
+        return s;
+    }
+    test1("hello"," ","world","!");
+
+
+    //基本数据类型的传递
+    var a = 2;
+    function foo(x){
+        x = 1;
+        console.log(a,x);
+    }
+    foo(a);
+    console.log(a);
+
+    //引用数据类型的传递
+    var obj1 = {x:0};
+    function bar(obj2){
+        obj2.x = 2;
+        console.log(obj1,obj2);
+    }
+    bar(obj1);
+
+
+    //思考：定义一个函数完成对变量的复制过程，生成新的变量，并返回。
+    //引用数据类型时，数组、对象
+    var obj3 = {"username":"zhangsan","age":20}
+    
+    function copyArg(arg1){
+        var copy;
+        switch(true){
+            case (arg1 instanceof String):
+                copy = arg1;
+                break;
+            case (arg1 instanceof Number):
+                copy = arg1;
+                break;
+            case (arg1 instanceof Boolean):
+                copy = arg1;
+                break;
+            case (arg1 instanceof Array):
+                copy = {};
+                for(var i = 0;i < arg1.length;i++){
+                    copy[i] = arg1[i];
+                }
+                break;
+        }
+    }
+</script>
+</html>

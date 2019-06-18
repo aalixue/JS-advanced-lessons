@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /*对String的扩展*/
+    let str = "abcdef";
+    for(let i of str){
+        console.log(i);// a b c d e f 依次输出
+    }
+    //repeat(i) 是重复i次
+    console.log(str.repeat(4));//abcdefabcdefabcdefabcdef
+
+    /*对RegExp的扩展*/
+    let reg1 = /xyx/gi;
+    let reg2 = new RegExp("xyz",'gi');
+    let red3 = new RegExp(/xyz/gi);
+    let reg4 = new RegExp(/xyz/gi,'i');
+
+    /*正则表达式对象.flags获取到正则表达式修饰符*/
+    console.log(reg1.flags);//gi
+
+    /*sticky y修饰符 它会从上一次匹配成功的结束位置开始匹配*/
+    let str1 = "aaa_aa_a";
+    let reg5 = /a+/g;
+    let reg6 = /a+/y;
+    console.log(reg5.exec(str1));//["aaa", index: 0, input: "aaa_aa_a", groups: undefined]
+    console.log(reg5.exec(str1));//["aa", index: 4, input: "aaa_aa_a", groups: undefined]
+    
+    console.log(reg6.exec(str1));//["aaa", index: 0, input: "aaa_aa_a", groups: undefined]
+    //上一次匹配结果的索引位置
+    reg6.lastIndex;
+    console.log(reg6.exec(str1));//null
+    //可以根据 正则对象，sticky属性判断是否设置了y属性
+    console.log(reg6.sticky);//true 
+
+</script>
+</html>

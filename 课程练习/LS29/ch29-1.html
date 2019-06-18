@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /*
+        将类数组结构转化为数组
+    */
+    console.log(Array.from("abcdef"));//Array(6)   (6) ["a", "b", "c", "d", "e", "f"]
+    function fn1(){
+       console.log(arguments);//Arguments(3) [1, 2, 3, callee: ƒ, Symbol(Symbol.iterator): ƒ]  实参比形参多
+       console.log(Array.from(arguments));//(3) [1, 2, 3]
+    }
+    fn1(1,2,3);
+
+    /*
+        Array.of将单个的元素转化为数组
+    */
+    console.log(Array.of(1,2,3));//(3) [1, 2, 3]
+
+
+    /*
+        复制数组里面的元素到数组的特定位置
+        arr1.copyWithin(target,start,end);
+        target：复制的目标位置
+        start：复制元素的起始位置
+        end：复制元素的结束位置
+    */
+    var arr1 = [1,2,3,4,5,6];
+    console.log(arr1.copyWithin(0,4,5));//(6) [5, 2, 3, 4, 5, 6]  其中[start,end) 前面取，后面不取;
+
+
+    /*
+        Array.prototype.find
+        遍历数组中的元素，验证是否满足回调函数的验证条件
+        （回调函数的返回值）
+        返回满足条件的第一个数组
+
+        Array.protopyte.findIndex
+        同上，但返回的值是满足条件的第一个数组的索引值
+    */
+    let arr2 = [10,15,20,30,40];
+    let el = arr2.find(function(element){
+        return element>19;
+    })
+    console.log(el);//20
+
+    let elIndex = arr2.findIndex(function(element){
+        return element>29;
+    })
+    console.log(elIndex);//3
+
+    /*
+        fill(value,start,end);
+        向数组特定的起始位置和结束位置之间填充value
+
+        keys() 获取键的值
+        values 获取数组具体值
+    */
+    console.log(arr2.keys());
+</script>
+</html>

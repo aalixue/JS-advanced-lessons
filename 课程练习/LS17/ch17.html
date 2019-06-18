@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    var superObj = {
+        x:1,
+        y:2
+    };
+    var superObj_First = Object.create(superObj);
+    var superObj_Second = Object.create(superObj);
+    superObj_First.__proto__.x = 5;
+    console.log(superObj_Second.x);//5
+
+
+    var obj = {
+        x:1,
+        y:2
+    };
+    var obj1 = Object.create(obj);
+    var obj2 = Object.create(obj);
+    obj1.x = 3;
+    console.log(obj2.x);//1
+    obj1.__proto__.x = 3;
+    console.log(obj2.x);//3
+
+
+    //构造函数实现的对象
+    function Person(name){
+        this.name = name;
+    }
+    Person.prototype.age = 22;
+    Person.prototype.showName = function(){
+        console.log(this.name);
+    };
+    function Student(id){
+        this.id = id;
+    }
+    /*
+        new Person得到的对象所有的属性
+        person name属性Mike，person.__proto__.age
+        person.__proto__.showName
+    */
+    var person = new Person("Mike");
+    Student.prototype = person;//希望Student的prototype可以继承Person上的属性
+    var s1 = new Student(2017001);
+    var s2 = new Student(2017002);
+    console.log(s1.name,s1.age,s1.id);
+    console.log(s2.name,s2.age,s2.id);
+    console.log(s1.id,s2.id);
+    /*
+        s1自身上面没有age，s1.__proto__ == Student.prototype
+        Student.prototype = person; person对象上没有age属性
+        s1.__proto__.__proto == person.__proto__
+        person.__proto__ == Person.prototype
+    */
+    console.log(s1.age,s2.age);
+    console.log(s1.name,s2.name);
+    s1.__proto__.name = "Jack";
+    console.log(s2.name);//Jack
+    /*
+        s1.__proto__.__proto__ == Person.prototype
+    */
+    s1.__proto__.__proto__.age = 99;
+    console.log(s2.age);//9
+</script>
+</html>

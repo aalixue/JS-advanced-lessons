@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //(function 函数名(参数){
+        //函数体
+    //}(实参))
+    (function max(x,y){
+        return x>y ? x : y;
+    }(2,3));
+
+    (function min(a,b){
+        return a > b ? b : a;
+    })(2,3);
+
+
+    var userId = 2;
+    document.onclick = function(){
+        alert(userId);
+    }
+    // if(true){
+    //     var userId = 20;//useerId污染了上边的userId
+    // }
+    (function(){
+        if(true){
+            var userId = 20;//避免userId污染上边的userId
+        }
+    })();
+
+
+    function foo(){
+        var arr1 = [];
+        for(var i = 0;i < 10;i++){
+            arr1[i] = function(){//仅仅是定义，没有执行
+                return i;//i不确定
+            }
+        }
+        return arr1;
+    }
+    var arr2 = foo();
+    arr2[0]();//结果为10
+
+
+    function foo(){
+        var arr1 = [];
+        for(var i = 0;i < 10;i++){
+            arr1[i] = (function(){//立即实行
+                return i;//第一次循环i为0,第二次循环i为1,以此类推
+            })()
+        }
+        return arr1;
+    }
+    var arr2 = foo();
+    arr2;//结果为一个数组从0到9
+
+
+
+    function foo(){
+        var arr1 = [];
+        for(var i = 0;i < 10;i++){
+            //形成10个作用域，作用域内的j值各不相同，并且不会共享
+            (function(j){
+                arr1[j] = function(){
+                    return j;
+                }
+            })(i)
+        }
+        return arr1;
+    }
+    var arr2 = foo();
+    arr2[0]();//结果为0,是预期的值
+
+    //总结
+    //1.立即执行函数表达式
+    //2.避免变量的污染，形成一个独立的空间，变量仅在作用域内起作用
+</script>
+</html>
